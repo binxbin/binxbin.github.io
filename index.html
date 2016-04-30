@@ -86,7 +86,7 @@ function draw2(v,c2,bc2,w,h) {
 	gaussBlur_1(data,data,w,h,10);
 	idata.data = data;
 	// Draw the pixels onto the visible canvas
-	c.putImageData(idata,0,0);
+	c2.putImageData(idata,0,0);
 	// Start over!
 	setTimeout(draw,20,v,c2,bc2,w,h);
 }

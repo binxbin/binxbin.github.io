@@ -10,9 +10,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	var context2 = canvas2.getContext('2d');
 	var back = document.createElement('canvas');
 	var backcontext = back.getContext('2d');
-	
-	var back2 = document.createElement('canvas2');
-	var backcontext2 = back2.getContext('2d');
  
 	var cw,ch;
  
@@ -26,12 +23,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		
 		canvas2.width = cw;
 		canvas2.height = ch;
-		back2.width = cw;
-		back2.height = ch;
-		
 		
 		draw(v,context,backcontext,cw,ch);
-		draw2(v,context2,backcontext2,cw,ch);
+		draw2(v,context2,cw,ch);
 	},false);
  
 },false);
@@ -76,19 +70,18 @@ function gaussBlur_1 (scl, tcl, w, h, r) {
         }
 }
 
-function draw2(v,c2,bc2,w,h) {
-	if(v.paused || v.ended)	return false;
-	// First, draw it into the backing canvas
-	bc2.drawImage(v,0,0,w,h);
-	// Grab the pixel data from the backing canvas
-	var idata = bc2.getImageData(0,0,w,h);
+function draw2(v,c2,w,h) {
+	if(v.paused || v.ended)	return false;	
+	c2.drawImage(v,0,0,w,h);
+	
+	var idata = c2.getImageData(0,0,w,h);
 	var data = idata.data;
 	gaussBlur_1(data,data,w,h,10);
 	idata.data = data;
 	// Draw the pixels onto the visible canvas
 	c2.putImageData(idata,0,0);
 	// Start over!
-	setTimeout(draw2,20,v,c2,bc2,w,h);
+	setTimeout(draw2,20,v,c2,w,h);
 }
 </script> 
  

@@ -91,7 +91,7 @@ function draw2(v,c2,w,h) {
 	
 	var idata = c2.getImageData(0,0,w,h);
 	var data = idata.data;
-	gaussBlur_1(data,data,w,h,10);
+	gaussBlur_1(data,data,w,h,5);
 	idata.data = data;
 	// Draw the pixels onto the visible canvas
 	c2.putImageData(idata,0,0);
